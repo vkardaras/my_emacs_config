@@ -1,5 +1,4 @@
-;; -*- lexical-binding: t; -*-
-;;; buffer-move.el --- Buffer move allows for better window controls.
+;;; buffer-move.el --- Buffer move allows for better window controls -*- lexical-binding: nil; -*-
 
 ;; Copyright (C) 2004-2014  Lucas Bonnet <lucas@rincevent.net.fr>
 
