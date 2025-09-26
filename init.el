@@ -119,6 +119,7 @@
   (setq dashboard-center-content t) ;; set to 't' for centered content
   (setq dashboard-display-icons-p t)     ; display icons on both GUI and terminal
   (setq dashboard-icon-type 'nerd-icons) ; use `nerd-icons' package
+  (setq dashboard-projects-backend 'project-el)
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
                           (bookmarks . 3)
@@ -129,7 +130,10 @@
 				      (bookmarks . "book")))
   :config
   (dashboard-setup-startup-hook))
-(add-hook 'dashboard-mode-hook (lambda () (display-line-numbers-mode -1)))
+(dolist (mode '(dashboard-mode-hook
+                vterm-mode-hook
+                term-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode -1))))
 
 ;;; Completions -----
 (use-package completion-preview
