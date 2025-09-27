@@ -19,6 +19,7 @@ workspace/
 tramp
 bookmarks
 history
+init.el.back
 places
 projects
 recentf

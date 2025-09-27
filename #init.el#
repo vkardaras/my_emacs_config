@@ -52,6 +52,16 @@ The DWIM behaviour of this command is as follows:
 
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 
+;;; Tweak the looks of Emacs
+
+;; Those three belong in the early-init.el, but I am putting them here
+;; for convenience.  If the early-init.el exists in the same directory
+;; as the init.el, then Emacs will read+evaluate it before moving to
+;; the init.el.
+(menu-bar-mode 1)
+(scroll-bar-mode 1)
+(tool-bar-mode -1)
+
 (let ((mono-spaced-font "Monospace")
       (proportionately-spaced-font "Sans"))
   (set-face-attribute 'default nil :family mono-spaced-font :height 100)
