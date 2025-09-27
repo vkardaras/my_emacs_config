@@ -1,4 +1,10 @@
 ;;; init.el --- Vasilis init file -*- lexical-binding: t; -*-
+;;
+;;; Commentary:
+;;; Vasilis' Emacs configuration
+;;
+;;; Code:
+
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
 
@@ -26,6 +32,18 @@
   :ensure nil
   :hook (after-init . delete-selection-mode))
 
+
+(electric-pair-mode 1)                   ; Turns on automatic parens pairing
+(global-auto-revert-mode t)              ; Automatically show changes if the file has changed
+;; (recentf-mode 1)
+;; (savehist-mode 1)
+;; (save-place-mode 1)
+(global-display-line-numbers-mode 1)     ; Display line numbers
+(setq display-line-numbers-type 'relative)
+(global-visual-line-mode t)              ; Enable truncated lines
+
+(setq inhibit-startup-screen t)
+
 (defun prot/keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
 
@@ -52,11 +70,13 @@ The DWIM behaviour of this command is as follows:
 
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 
-(let ((mono-spaced-font "Monospace")
-      (proportionately-spaced-font "Sans"))
-  (set-face-attribute 'default nil :family mono-spaced-font :height 100)
-  (set-face-attribute 'fixed-pitch nil :family mono-spaced-font :height 1.0)
-  (set-face-attribute 'variable-pitch nil :family proportionately-spaced-font :height 1.0))
+;; Fonts
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
+(set-face-attribute 'font-lock-comment-face nil
+  :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+  :slant 'italic)
+(setq-default line-spacing 0.12)
 
 (use-package modus-themes
   :ensure t
@@ -157,3 +177,21 @@ The DWIM behaviour of this command is as follows:
   (setq trashed-use-header-line t)
   (setq trashed-sort-key '("Date deleted" . t))
   (setq trashed-date-format "%Y-%m-%d %H:%M:%S"))
+
+;; Configure which key
+(use-package which-key
+  :init
+    (which-key-mode 1)
+  :config
+  (setq which-key-side-window-location 'bottom
+	  which-key-sort-order #'which-key-key-order-alpha
+	  which-key-sort-uppercase-first nil
+	  which-key-add-column-padding 1
+	  which-key-max-display-columns nil
+	  which-key-min-display-lines 6
+	  which-key-side-window-slot -10
+	  which-key-side-window-max-height 0.25
+	  which-key-idle-delay 0.3
+	  which-key-max-description-length 25
+	  which-key-allow-imprecise-window-fit nil
+	  which-key-separator " → " ))
